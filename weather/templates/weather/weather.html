@@ -1,0 +1,99 @@
+{% extends "weather/index.html" %} {% load static %} {% block context %} <br />
+<div id="booking" class="section">
+  <div class="section-center">
+    <div class="container">
+      <div class="row">
+        <div class="booking-form">
+          <form method="POST" clas="h-50">
+            {% csrf_token %}
+            <div class="col-md-8">
+              <div class="form-group">
+                <input
+                  class="form-control"
+                  style="height: calc(3.5em + 0.75rem + 2px)"
+                  name="name"
+                  type="text"
+                  placeholder="Enter your country"
+                />
+                {% comment %} <span class="form-label">Destination</span> {%
+                endcomment %}
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-btn">
+                <button type="submit" class="submit-btn">send</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} card view {% endcomment %}
+
+<div>
+  <b-card-group deck>
+    <b-card
+      title="Title"
+      img-src="https://picsum.photos/300/300/?image=41"
+      img-alt="Image"
+      img-top
+    >
+      {% comment %} <b-card-text> </b-card-text> {% endcomment %}
+      <template #footer>
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </template>
+    </b-card>
+
+    <b-card
+      title="Title"
+      img-src="https://picsum.photos/300/300/?image=41"
+      img-alt="Image"
+      img-top
+    >
+      <template #footer>
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </template>
+    </b-card>
+
+    <b-card
+      title="Title"
+      img-src="https://picsum.photos/300/300/?image=41"
+      img-alt="Image"
+      img-top
+    >
+      <b-card-text style="font_size: large">
+        what is the weather like ?
+      </b-card-text>
+      <template #footer>
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </template>
+    </b-card>
+  </b-card-group>
+</div>
+
+{% for city_weather in weather_data %}
+
+<div class="ml-4">
+  <img
+    src="http://openweathermap.org/img/w/{{ city_weather.icon}}.png"
+    alt="Image"
+    style="width: 60px; height: 35px"
+  />
+
+  <div class="card-group">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{city_weather.city|title}}</h5>
+        <p class="card-text">{{city_weather.temperature}} &#x2109;</p>
+        <p class="card-text">
+          <small class="text-muted">{{city_weather.description}}</small>
+        </p>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% endblock %}
+</div>
